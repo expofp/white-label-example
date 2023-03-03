@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        window.onload = function () {
+        	const expo = 22;
+        	const privateKey = "serge:MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAN0npbgTDv4V45wFteMwTx7EBIuPwCqTh086sFjQExHE3XV1r2f1N7iGjVGsAIiYKOCM4/HAPiilvwSoe5J0bWZdyhTf0zVUghJDgOffzmd53Gl9PBZoQSGOOeUXz69CY+FsQnU9nlc/RqgzgCu0/JvqHWU/1JCPztl0T8YxqqatAgMBAAECgYEAygLlRXdjQoUMHAC7XINMQnYbEMCGcF3CQ4UAgJ/QS3LgN+MADp3YAB4oCGptMliLPlJ0BOft34NHMSIVfnoLUrsSwtphtQqCOyEHurk1geKv3miyKI4+MekpCoALJAf4RWSddDWIDYenWyn3NnHh2/ELZcSGBYzgbfGHS5tPFAECQQD7P0gUu5WemJeHRORF4Mqk1U26JRNW/avw+bVGlaj/TQWjeumLTNT9tWN5QJpn645Hv7MIi7dYvi2G0qZZtjahAkEA4VajIv6nA4FixhMvN1TZCt5Bh0lu94IQjt6aCZUCCnOvFYCWu+EUKrGV8EHS4Oy7CWl4Q1hEy8EVxIzW5RSQjQJAFYyO7SBNq+WgkXyKK6glGVAmM4H8j6iAN9HjB2PMs+DyS9w97bGwTvZgysSMub8NXAAIJgJ9vkHJe9fTZrxnIQJBAK6CbACz+h/K2fXP8acGPLgf+9uL0TY5Mh2S4vQ8w8HYaWVbmmCSJQ4TTa0tLOUoMIlPduWgvFaXiAYZlGsAjBkCQQDiXt6psTnegNF7n3/O/jd367qV9N5XUJYwKTpGgBpM9nGF71pMKtRieQmUXPMQHMYQUuWByiSWxImVCkEcV7/U:MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdJ6W4Ew7+FeOcBbXjME8exASLj8Aqk4dPOrBY0BMRxN11da9n9Te4ho1RrACImCjgjOPxwD4opb8EqHuSdG1mXcoU39M1VIISQ4Dn385nedxpfTwWaEEhjjnlF8+vQmPhbEJ1PZ5XP0aoM4ArtPyb6h1lP9SQj87ZdE/GMaqmrQIDAQAB:anNWYEqv3Zg8yLjQoJLHXJ2rlnTMB+YUHxpjolMOxSJrVUE2GJiIb+FXBGutXO9fnIZA9Re3fk14OaV67csbEQKCQJJKeaat2JOaL2LwmQiSlu+QvYf5abtrXwu3wCL+TbC5LmxOWOjOD22YY465tH+sNM92jxCjwtIcArQkrvw=";
+        	const [scope] = privateKey.split(":");
+
+            fetch("https://white-label.herokuapp.com/createSignature", {
+            	method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+                body: JSON.stringify({
+                    expo,
+					privateKey
+                })
+            }).then(res => res.json())
+            .then(res => {
+				const iframe = document.createElement("iframe");
+				iframe.src = `https://white-label.herokuapp.com/designer?expo=${expo}&scope=${scope}&signature=${res.signature}`;
+				iframe.allowFullscreen = "allowfullscreen";
+
+				document.body.append(iframe);
+            })
+		}
+    </script>
+</body>
+</html>
