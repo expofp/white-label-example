@@ -28,22 +28,23 @@
 
             fetch("https://white-label.herokuapp.com/createSignature", {
             	method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify({
                     expo,
-					privateKey
+                    privateKey
                 })
-            }).then(res => res.json())
-            .then(res => {
-				const iframe = document.createElement("iframe");
-				iframe.src = `https://white-label.herokuapp.com/designer?expo=${expo}&scope=${scope}&signature=${res.signature}`;
-				iframe.allowFullscreen = "allowfullscreen";
-
-				document.body.append(iframe);
             })
-		}
+            .then(res => res.json())
+            .then(res => {
+                const iframe = document.createElement("iframe");
+                iframe.src = `https://white-label.herokuapp.com/designer?expo=${expo}&scope=${scope}&signature=${res.signature}`;
+                iframe.allowFullscreen = "allowfullscreen";
+
+                document.body.append(iframe);
+            })
+        }
     </script>
 </body>
 </html>
