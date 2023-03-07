@@ -39,15 +39,15 @@
     <div id="designer"></div>
     <script>
         window.onload = function () {
-        	const expo = "<%= expo %>";
-        	const scope = "<%= scope %>";
+            const expo = "<%= expo %>";
+            const scope = "<%= scope %>";
             const signature = "<%= signature %>";
 
-			const iframe = document.createElement("iframe");
-			iframe.src = `https://white-label.herokuapp.com/designer?expo=${expo}&scope=${scope}&signature=${signature}`;
-			iframe.allowFullscreen = "allowfullscreen";
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://white-label.herokuapp.com/designer?expo=${expo}&scope=${scope}&signature=${signature}`;
+            iframe.allowFullscreen = "allowfullscreen";
 
-			document.getElementById("designer").append(iframe);
+            document.getElementById("designer").append(iframe);
         }
     </script>
 </body>
