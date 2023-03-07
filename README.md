@@ -1,7 +1,7 @@
 # white-label-example
 This code is an example of how to use a service that requires a signature for authentication.
 
-The version of node.js must be at least 18.0.0
+The version of ```Node.js``` must be at least ```18.0.0```
 
 Getting Started
 To run this example, follow these steps:
