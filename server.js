@@ -7,8 +7,9 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-
 app.engine('html', ejs.renderFile);
+
+const __dirname = path.resolve();
 
 const expo = "22";
 
@@ -17,12 +18,13 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 const signature = await signWithScopeSecret({ expo }, PRIVATE_KEY);
 
-app.get("/designer", async (req, res) => {
-	return res.render(path.join(__dirname, "designer.html"), { signature, SCOPE, expo });
+app.get("/designer", (req, res) => {
+	res.render(path.join(__dirname, "designer.html"), { signature, SCOPE, expo });
 });
 
 app.get("/", (req, res) => {
-	return res.send("<a href='/designer'>Designer</a>");
+	res.send("<a href='/designer'>Designer</a>");
+});
 })
 
 const PORT = process.env.PORT || 5000;
