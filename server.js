@@ -25,7 +25,6 @@ app.get("/designer", (req, res) => {
 app.get("/", (req, res) => {
 	res.send("<a href='/designer'>Designer</a>");
 });
-})
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
