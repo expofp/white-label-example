@@ -40,12 +40,12 @@
     <script>
         window.onload = function () {
             const expo = "<%= expo %>";
-            const scope = "<%= scope %>";
+            const scope = "<%= SCOPE %>";
             const signature = "<%= signature %>";
 
             const iframe = document.createElement("iframe");
             iframe.src = `https://white-label.herokuapp.com/designer?expo=${expo}&scope=${scope}&signature=${signature}`;
-            iframe.allowFullscreen = "allowfullscreen";
+            iframe.allowFullscreen = true;
 
             document.getElementById("designer").append(iframe);
         }
