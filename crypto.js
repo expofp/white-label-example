@@ -1,6 +1,6 @@
-const { subtle } = require("node:crypto");
+import { subtle } from "node:crypto";
 
-async function signWithScopeSecret(data, scopeKey) {
+export async function signWithScopeSecret(data, scopeKey) {
 	const [scope, privateKey, publicKey, publicKeySignature] = scopeKey.split(":");
 	const signature = await sign(data, privateKey);
 	return btoa([signature, scope, publicKey, publicKeySignature].join(":"));
@@ -30,8 +30,4 @@ async function stringToPrivateKey(key) {
 		true,
 		["sign"]
 	);
-}
-
-module.exports = {
-	signWithScopeSecret
 }

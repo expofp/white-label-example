@@ -1,8 +1,8 @@
-const express = require("express");
-const path = require("path");
-const ejs = require("ejs");
-const { signWithScopeSecret } = require("./crypto");
-const dotenv = require("dotenv");
+import express from "express";
+import path from "path";
+import ejs from "ejs";
+import { signWithScopeSecret } from "./crypto.js";
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
@@ -15,11 +15,11 @@ const expo = "22";
 const SCOPE = process.env.SCOPE;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
-const signature = signWithScopeSecret({ expo }, PRIVATE_KEY);
+const signature = await signWithScopeSecret({ expo }, PRIVATE_KEY);
 
 app.get("/designer", async (req, res) => {
-	return res.render(path.join(__dirname, "designer.html"), { signature: await signature, SCOPE, expo });
-})
+	return res.render(path.join(__dirname, "designer.html"), { signature, SCOPE, expo });
+});
 
 app.get("/", (req, res) => {
 	return res.send("<a href='/designer'>Designer</a>");
