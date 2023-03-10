@@ -23,7 +23,18 @@ app.get("/designer", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-	res.send("<a href='/designer'>Designer</a>");
+	res.send(`
+		<div>
+			<a href='/designer'>Designer</a>
+		</div>
+		<div>
+			<a href='/sendData'>Send data.js</a>
+		</div>
+	`);
+});
+
+app.get("/sendData", (req, res) => {
+	res.render(path.join(__dirname, "sendData.html"), { signature, SCOPE, expo });
 });
 
 const PORT = process.env.PORT || 5000;
