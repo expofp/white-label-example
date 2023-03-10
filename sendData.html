@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<form action="" id="form">
+<form id="form">
     <textarea name="" cols="30" rows="10" id="textarea"></textarea>
     <button type="submit">Send</button>
 </form>
@@ -26,7 +26,7 @@
 			const value = document.getElementById("textarea").value;
             const cleanedJsonString = value.replace(/\n\s+/g, '');
 
-			fetch("http://localhost:3000/api/sendData", {
+			fetch("https://white-label.herokuapp.com/api/sendData", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
