@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body class="login-page">
+<form action="/login" method="post">
+    <div>
+        <label for="username">Login:</label>
+        <input type="text" name="username" id="username">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+    </div>
+    <div class="error"></div>
+    <div>
+        <button type="submit">Login</button>
+    </div>
+</form>
+
+    <script>
+        const $form = document.querySelector("form");
+
+        $form.addEventListener("submit", (e) => {
+        	e.preventDefault();
+
+			const username = document.querySelector("#username").value;
+			const password = document.querySelector("#password").value;
+
+        	fetch("https://white-label-example.herokuapp.com/login", {
+        		method: "POST",
+                headers: {
+        			"Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+        			username,
+                    password
+                })
+            }).then((res) => {
+            	if (!res.ok) {
+            		res.text().then((err) => {
+						document.querySelector(".error").textContent = err;
+                    })
+                } else {
+					window.location.href = '/';
+                }
+            })
+        })
+    </script>
+</body>
+</html>

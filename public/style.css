@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+}
+
+#designer {
+    position: relative;
+    flex-grow: 1;
+}
+
+#designer iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background: #230762;
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+    padding: 20px;
+}
+header a {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+header a:hover {
+    color: #e2175e;
+}
+
+#form {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+#form textarea {
+    padding: 10px;
+    width: 100%;
+    height: 600px;
+    outline: none;
+}
+
+#form textarea.invalid {
+    border: 1px solid red;
+}
+
+#form textarea.valid {
+    border: 1px solid green;
+}
+
+.status.invalid {
+    color: red;
+}
+
+.status.valid {
+    color: green;
+}
+
+textarea.invalid::selection {
+    background-color: #f00; /* Red background color for the selected range */
+}
+
+* {
+    box-sizing: border-box;
+}
+.login-page {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.login-page form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.login-page label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.login-page input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0069d9;
+}
+
+.error {
+    color: red;
+}
