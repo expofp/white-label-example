@@ -1,10 +1,8 @@
 # white-label-example
 
-https://white-label-example.herokuapp.com/ - See an example on a live server
+https://white-label-example.herokuapp.com/ - Here you can insert a json object, to create/update the data.js file
 
 https://white-label-example.herokuapp.com/designer - Designer, to edit your plans
-
-https://white-label-example.herokuapp.com/sendData - Here you can insert a json object, to create/update the data.js file
 
 # Usage
 The version of ```Node.js``` must be at least ```18.0.0```
@@ -21,6 +19,8 @@ To use your example based on this, you need to:
   
 4. Add ```SCOPE=<your unique scope>``` to ```.env```
 
+5.Add ```USERNAME=<username>``` and ```PASSWORD=<password>``` to ```.env``` to set login and password (basic authentication is used)
+
 4. Run the server using ```npm start```.
 
-5. Navigate to http://localhost:5000 in your browser to see the result.
+5. Go to http://localhost:5000 in your browser and enter the username and password you specified earlier.
