@@ -19,8 +19,8 @@ To use your example based on this, you need to:
   
 4. Add ```SCOPE=<your unique scope>``` to ```.env```
 
-5.Add ```USERNAME=<username>``` and ```PASSWORD=<password>``` to ```.env``` to set login and password (basic authentication is used)
+5. Add ```USERNAME=<username>``` and ```PASSWORD=<password>``` to ```.env``` to set login and password (basic authentication is used)
 
-4. Run the server using ```npm start```.
+6. Run the server using ```npm start```.
 
-5. Go to http://localhost:5000 in your browser and enter the username and password you specified earlier.
+7. Go to http://localhost:5000 in your browser and enter the username and password you specified earlier.
