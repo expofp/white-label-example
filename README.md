@@ -19,7 +19,7 @@ To use your example based on this, you need to:
   
 4. Add ```SCOPE=<your unique scope>``` to ```.env```
 
-5. Add ```USERNAME=<username>``` and ```PASSWORD=<password>``` to ```.env``` to set login and password (basic authentication is used)
+5. Add ```APP_USERNAME=<username>``` and ```APP_PASSWORD=<password>``` to ```.env``` to set login and password (basic authentication is used)
 
 6. Run the server using ```npm start```.
 
