@@ -21,7 +21,7 @@ app.use(session({
 app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
 
-const expo = "CoffeeFest";
+const expo = "Event1";
 
 const SCOPE = process.env.SCOPE;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
@@ -38,7 +38,7 @@ app.get("/login", (req, res) => {
 
 app.post('/login', (req, res) => {
 	const { username, password } = req.body;
-	if (username === process.env.USERNAME && password === process.env.PASSWORD) {
+	if (username === process.env.APP_USERNAME && password === process.env.APP_PASSWORD) {
 		req.session.authenticated = true;
 		res.redirect('/');
 	} else {
@@ -47,11 +47,30 @@ app.post('/login', (req, res) => {
 });
 
 app.get("/designer", (req, res) => {
-	res.render("pages/designer", { signature, SCOPE, expo });
+	res.render("pages/designer", {
+		signature,
+		SCOPE,
+		expo,
+		page_name: "designer"
+	});
+});
+
+app.get("/sendData", (req, res) => {
+	res.render("pages/sendData", {
+		signature,
+		SCOPE,
+		expo,
+		page_name: "send-data"
+	});
 });
 
 app.get("/", (req, res) => {
-	res.render("pages/index", { signature, SCOPE, expo });
+	res.render("pages/index", {
+		signature,
+		SCOPE,
+		expo,
+		page_name: "dashboard"
+	});
 });
 
 const PORT = process.env.PORT || 5000;

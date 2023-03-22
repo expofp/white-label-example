@@ -44,8 +44,17 @@ header a {
     transition: 0.3s;
 }
 
+header .active {
+    color: #e2175e;
+}
+
 header a:hover {
     color: #e2175e;
+}
+
+.logo {
+    width: 140px;
+    margin-right: 20px;
 }
 
 #form {
@@ -69,6 +78,14 @@ header a:hover {
 
 #form textarea.valid {
     border: 1px solid green;
+}
+
+.dashboard-info {
+    padding: 20px;
+}
+
+.dashboard-info h2 {
+    margin-bottom: 10px;
 }
 
 .status.invalid {
