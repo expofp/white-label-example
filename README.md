@@ -1,8 +1,14 @@
 # white-label-example
 
-https://white-label-example.herokuapp.com/ - Here you can insert a json object, to create/update the data.js file
+# Pages
 
-https://white-label-example.herokuapp.com/designer - Designer, to edit your plans
+[Dashboard](https://white-label-example.herokuapp.com/) - example dashboard.
+
+[Designer](https://white-label-example.herokuapp.com/designer) - design floor plan. Add this page to your service.
+
+[View](https://efp-white-label.s3.us-east-1.amazonaws.com/build/testScope/Event1/index.html) - view floor plan. Embed on your website, app or kiosk.
+
+[Send data](https://white-label-example.herokuapp.com/sendData) - example of exhibitor data file (no need to add as a separate page).
 
 # Usage
 The version of ```Node.js``` must be at least ```18.0.0```
@@ -19,7 +25,7 @@ To use your example based on this, you need to:
   
 4. Add ```SCOPE=<your unique scope>``` to ```.env```
 
-5. Add ```USERNAME=<username>``` and ```PASSWORD=<password>``` to ```.env``` to set login and password (basic authentication is used)
+5. Add ```APP_USERNAME=<username>``` and ```APP_PASSWORD=<password>``` to ```.env``` to set login and password (basic authentication is used)
 
 6. Run the server using ```npm start```.
 

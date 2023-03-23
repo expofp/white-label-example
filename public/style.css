@@ -41,7 +41,7 @@ header {
 header a {
     color: #fff;
     text-decoration: none;
-    transition: 0.3s;
+    transition: color 0.3s;
 }
 
 header .active {
