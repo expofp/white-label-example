@@ -21,6 +21,8 @@ app.use(session({
 app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
 
+app.set("trust proxy", 1);
+
 const expo = "Event1";
 
 const SCOPE = process.env.SCOPE;
