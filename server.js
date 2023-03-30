@@ -33,7 +33,12 @@ app.use(express.static("public"));
 app.use(requireAuthentication);
 
 app.get("/login", (req, res) => {
-	res.render("pages/login");
+	const protocol = req.protocol;
+	const host = req.get("host");
+
+	res.render("pages/login", {
+		current_domain: `${protocol}://${host}`
+	});
 });
 
 app.post('/login', (req, res) => {
