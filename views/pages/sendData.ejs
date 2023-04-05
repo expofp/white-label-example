@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Send data</title>
+</head>
+<body>
+<%- include("../header.ejs") %>
+<form id="form">
+    <textarea cols="30" rows="10" id="textarea"></textarea>
+    <div class="status"></div>
+    <button type="submit">Send</button>
+</form>
+
+<script>
+	window.onload = () => {
+		const expo = "<%= expo %>";
+		const scope = "<%= SCOPE %>";
+		const signature = "<%= signature %>";
+
+        const json = <%- JSON.stringify(data) %>;
+
+		const $form = document.getElementById("form");
+		const $textarea = $form.querySelector("textarea");
+		const $status = $form.querySelector(".status");
+
+		$textarea.value = JSON.stringify(json, null, 4);
+
+		$form.addEventListener("submit", (e) => {
+			e.preventDefault();
+			$textarea.classList.remove("invalid", "valid");
+			$status.classList.remove("invalid", "valid");
+			$status.textContent = "";
+
+			try {
+				JSON.parse($textarea.value);
+
+				$status.textContent = "Valid json";
+				$textarea.classList.remove("invalid");
+			} catch (error) {
+				if (error instanceof SyntaxError) {
+					const position = error.message.match(/position (\d+)/);
+					if (position && position.length === 2) {
+						const startIndex = parseInt(position[1]) - 1;
+						const invalidChar = $textarea.value.charAt(startIndex);
+						const invalidIndex = $textarea.value.indexOf(invalidChar, startIndex + 1);
+						const endIndex = invalidIndex !== -1 ? invalidIndex : $textarea.value.length;
+						$textarea.focus();
+						$textarea.setSelectionRange(startIndex, endIndex);
+
+						$status.textContent = "Invalid json";
+						$textarea.classList.add("invalid")
+						$status.classList.add("invalid")
+
+						$textarea.selectionStart = startIndex;
+						$textarea.selectionEnd = endIndex;
+						$textarea.scrollTop = $textarea.scrollHeight * (startIndex / $textarea.value.length) - 650;
+					}
+				}
+				return;
+			}
+
+			$textarea.classList.add("valid");
+			$status.classList.add("valid");
+			$status.textContent = "Valid json";
+
+			fetch("http://localhost:3000/api/sendData", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					expo,
+					scope,
+					signature,
+					data: $textarea.value
+				})
+			})
+		})
+	}
+</script>
+</body>
+</html>

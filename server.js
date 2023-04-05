@@ -5,6 +5,7 @@ import * as dotenv from "dotenv";
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import fs from "fs";
 
 dotenv.config();
 
@@ -18,8 +19,7 @@ app.use(session({
 	saveUninitialized: false
 }));
 
-app.engine('html', ejs.renderFile);
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 
 app.set("trust proxy", 1);
 
@@ -32,7 +32,7 @@ const signature = await signWithScopeSecret({ expo }, PRIVATE_KEY);
 
 app.use(express.static("public"));
 
-app.use(requireAuthentication);
+// app.use(requireAuthentication);
 
 app.get("/login", (req, res) => {
 	const protocol = req.protocol;
@@ -63,10 +63,12 @@ app.get("/designer", (req, res) => {
 });
 
 app.get("/sendData", (req, res) => {
+	const data = JSON.parse(fs.readFileSync("data.json", "utf-8"));
 	res.render("pages/sendData", {
 		signature,
 		SCOPE,
 		expo,
+		data,
 		page_name: "send-data"
 	});
 });
