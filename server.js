@@ -32,7 +32,7 @@ const signature = await signWithScopeSecret({ expo }, PRIVATE_KEY);
 
 app.use(express.static("public"));
 
-// app.use(requireAuthentication);
+app.use(requireAuthentication);
 
 app.get("/login", (req, res) => {
 	const protocol = req.protocol;

@@ -68,7 +68,7 @@
 			$status.classList.add("valid");
 			$status.textContent = "Valid json";
 
-			fetch("http://localhost:3000/api/sendData", {
+			fetch("https://white-label.herokuapp.com/api/sendData", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
