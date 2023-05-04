@@ -27,6 +27,7 @@
 		const $form = document.getElementById("form");
 		const $textarea = $form.querySelector("textarea");
 		const $status = $form.querySelector(".status");
+		const $button = $form.querySelector("button");
 
 		$textarea.value = JSON.stringify(json, null, 4);
 
@@ -38,9 +39,6 @@
 
 			try {
 				JSON.parse($textarea.value);
-
-				$status.textContent = "Valid json";
-				$textarea.classList.remove("invalid");
 			} catch (error) {
 				if (error instanceof SyntaxError) {
 					const position = error.message.match(/position (\d+)/);
@@ -64,9 +62,7 @@
 				return;
 			}
 
-			$textarea.classList.add("valid");
-			$status.classList.add("valid");
-			$status.textContent = "Valid json";
+			$button.disabled = true;
 
 			fetch("https://white-label.herokuapp.com/api/sendData", {
 				method: "POST",
@@ -80,6 +76,24 @@
 					data: $textarea.value
 				})
 			})
+            .then((res) => {
+				if (!res.ok) {
+					return res.json().then((errorData) => {
+						console.log(errorData);
+						throw new Error(errorData.message);
+					});
+				} else {
+					$textarea.classList.add("valid");
+					$status.classList.add("valid");
+					$status.textContent = "Valid json";
+                }
+            }).catch((err) => {
+				$textarea.classList.add("invalid");
+				$status.classList.add("invalid");
+				$status.textContent = err.message;
+            }).finally(() => {
+            	$button.disabled = false;
+            })
 		})
 	}
 </script>

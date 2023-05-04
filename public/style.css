@@ -145,7 +145,12 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+button:disabled {
+    background-color: gray;
+    cursor: default;
+}
+
+button:not(:disabled):hover {
     background-color: #0069d9;
 }
 
