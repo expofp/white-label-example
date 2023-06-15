@@ -6,12 +6,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.5.1/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.5.1/jsoneditor.min.js"></script>
     <title>Send data</title>
 </head>
 <body>
 <%- include("../header.ejs") %>
 <form id="form">
-    <textarea cols="30" rows="10" id="textarea"></textarea>
+    <div id="jsoneditor" style="width: 100%; height: 600px;"></div>
     <div class="status"></div>
     <button type="submit">Send</button>
 </form>
@@ -24,40 +26,29 @@
 
         const json = <%- JSON.stringify(data) %>;
 
+		const container = document.getElementById("jsoneditor");
+		const options = {
+			mode: 'code',
+			mainMenuBar: false,
+		};
+		const editor = new JSONEditor(container, options, json);
+
 		const $form = document.getElementById("form");
-		const $textarea = $form.querySelector("textarea");
+
 		const $status = $form.querySelector(".status");
 		const $button = $form.querySelector("button");
 
-		$textarea.value = JSON.stringify(json, null, 4);
-
 		$form.addEventListener("submit", (e) => {
 			e.preventDefault();
-			$textarea.classList.remove("invalid", "valid");
 			$status.classList.remove("invalid", "valid");
 			$status.textContent = "";
 
 			try {
-				JSON.parse($textarea.value);
+				JSON.parse(editor.getText());
 			} catch (error) {
 				if (error instanceof SyntaxError) {
-					const position = error.message.match(/position (\d+)/);
-					if (position && position.length === 2) {
-						const startIndex = parseInt(position[1]) - 1;
-						const invalidChar = $textarea.value.charAt(startIndex);
-						const invalidIndex = $textarea.value.indexOf(invalidChar, startIndex + 1);
-						const endIndex = invalidIndex !== -1 ? invalidIndex : $textarea.value.length;
-						$textarea.focus();
-						$textarea.setSelectionRange(startIndex, endIndex);
-
-						$status.textContent = "Invalid json";
-						$textarea.classList.add("invalid")
-						$status.classList.add("invalid")
-
-						$textarea.selectionStart = startIndex;
-						$textarea.selectionEnd = endIndex;
-						$textarea.scrollTop = $textarea.scrollHeight * (startIndex / $textarea.value.length) - 650;
-					}
+					$status.textContent = "Invalid json";
+					$status.classList.add("invalid")
 				}
 				return;
 			}
@@ -73,27 +64,25 @@
 					expo,
 					scope,
 					signature,
-					data: $textarea.value
+					data: editor.getText()
 				})
 			})
-            .then((res) => {
-				if (!res.ok) {
-					return res.json().then((errorData) => {
-						console.log(errorData);
-						throw new Error(errorData.message);
-					});
-				} else {
-					$textarea.classList.add("valid");
-					$status.classList.add("valid");
-					$status.textContent = "Valid json";
-                }
-            }).catch((err) => {
-				$textarea.classList.add("invalid");
+				.then((res) => {
+					if (!res.ok) {
+						return res.json().then((errorData) => {
+							console.log(errorData);
+							throw new Error(errorData.message);
+						});
+					} else {
+						$status.classList.add("valid");
+						$status.textContent = "Valid json";
+					}
+				}).catch((err) => {
 				$status.classList.add("invalid");
 				$status.textContent = err.message;
-            }).finally(() => {
-            	$button.disabled = false;
-            })
+			}).finally(() => {
+				$button.disabled = false;
+			})
 		})
 	}
 </script>
